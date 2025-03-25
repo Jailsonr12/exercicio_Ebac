@@ -1,34 +1,58 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
-        //Dimenções da xicara
-        Xicara xicara = new Xicara(10, 40);
-        xicara.encherXicara("Café");
-        xicara.xicaraVazia();
-        //Ação de toma o liquido
-        xicara.beber();
-        xicara.beber();
+        boolean stop = false;
+        Scanner scanner = new Scanner(System.in);
 
-        //Validação se tem liquido ainda
-        xicara.xicaraVazia();
+        System.out.println("Separando pessoas pelo sexo");
 
-        //Toma o ultimo galo
-        xicara.beber();
+        List<String> men = new ArrayList<>();
+        List<String> women = new ArrayList<>();
+        Map<String, String> peopleMap = new HashMap<>();
 
-       //chegar na metade do copo
-        xicara.xicaraVazia();
+        while (!stop) {
+            System.out.println("Insira um nome:");
+            String name = scanner.nextLine();
 
-        //lembrar oque estava bebendo
+            System.out.println("Insira o sexo da pessoa (M/F):");
+            String gender = scanner.nextLine().trim().toUpperCase();
 
-        xicara.oqueEstouBebendo();
+            peopleMap.put(name, gender);
 
-        //Validar se tem liquido ainda
-        xicara.beber();
+            if (gender.equals("M")) {
+                men.add(name);
+            } else if (gender.equals("F")) {
+                women.add(name);
+            } else {
+                System.out.println("Sexo inválido! Use 'M' ou 'F'.");
+            }
 
-        //validar se acabou o liquido
-        xicara.xicaraVazia();
+            System.out.println("Deseja continuar inserindo nomes?");
+            System.out.println("0 - Não");
+            System.out.println("1 - Sim");
+
+            boolean option = scanner.nextLine().equals("0");
+
+            if (option) {
+                stop = true;
+            }
+        }
+
+        System.out.println("\nLista de Homens:");
+        for (String name : men) {
+            System.out.println(name);
+        }
+
+        System.out.println("\nLista de Mulheres:");
+        for (String name : women) {
+            System.out.println(name);
+        }
+
+
+
+        scanner.close();
     }
 }
